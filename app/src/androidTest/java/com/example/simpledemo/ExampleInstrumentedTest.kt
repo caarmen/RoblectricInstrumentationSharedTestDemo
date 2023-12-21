@@ -1,12 +1,16 @@
 package com.example.simpledemo
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import org.junit.Assert.*
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -15,10 +19,16 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+    @get:Rule
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.simpledemo", appContext.packageName)
+    fun testApp() {
+        composeTestRule.onNodeWithTag("ResultText").assertTextEquals("")
+        composeTestRule.onNode(hasText("Click me")).performClick()
+        composeTestRule.onNodeWithTag("TextInput").performTextInput("test text")
+        composeTestRule.onNode(hasText("Close")).performClick()
+        composeTestRule.onNodeWithTag("ResultText").assertTextEquals("test text")
     }
 }

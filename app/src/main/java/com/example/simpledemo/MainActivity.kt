@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 class MainActivity : ComponentActivity() {
 
@@ -24,7 +26,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Column {
-                Text(text = textFromSecondActivity.value)
+                Text(
+                    text = textFromSecondActivity.value,
+                    modifier = Modifier.testTag("ResultText")
+                )
                 Button(onClick = {
                     val intent = Intent(this@MainActivity, SecondActivity::class.java)
                     resultLauncher.launch(intent)

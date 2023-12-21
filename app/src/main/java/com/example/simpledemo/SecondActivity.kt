@@ -14,6 +14,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 class SecondActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -26,6 +28,7 @@ class SecondActivity : ComponentActivity() {
                     label = { Text("Enter text") },
                     value = text,
                     onValueChange = { text = it },
+                    modifier = Modifier.testTag("TextInput")
                 )
                 Button(onClick = {
                     val result = Intent()
