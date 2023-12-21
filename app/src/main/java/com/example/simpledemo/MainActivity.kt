@@ -1,43 +1,37 @@
 package com.example.simpledemo
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.simpledemo.ui.theme.SimpleDemoTheme
+import androidx.compose.runtime.mutableStateOf
 
 class MainActivity : ComponentActivity() {
+
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            textFromSecondActivity.value = result.data?.extras?.getString("text") ?: ""
+        }
+    }
+    private var textFromSecondActivity = mutableStateOf("")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SimpleDemoTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+            Column {
+                Text(text = textFromSecondActivity.value)
+                Button(onClick = {
+                    val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                    resultLauncher.launch(intent)
+                }) {
+                    Text("Click me")
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SimpleDemoTheme {
-        Greeting("Android")
     }
 }
