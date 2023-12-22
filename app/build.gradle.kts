@@ -49,6 +49,12 @@ android {
             isIncludeAndroidResources = true
         }
     }
+    sourceSets.named("test") {
+        java.srcDirs("src/sharedTest/java")
+    }
+    sourceSets.named("androidTest") {
+        java.srcDirs("src/sharedTest/java")
+    }
 }
 
 dependencies {
