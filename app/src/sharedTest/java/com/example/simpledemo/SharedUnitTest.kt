@@ -4,6 +4,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 
@@ -19,5 +20,8 @@ class SharedUnitTest {
     fun testApp() {
         composeTestRule.onNodeWithTag("ResultText").assertTextEquals("")
         composeTestRule.onNode(hasText("Click me")).performClick()
+        composeTestRule.onNodeWithTag("TextInput").performTextInput("test text")
+        composeTestRule.onNode(hasText("Close")).performClick()
+        composeTestRule.onNodeWithTag("ResultText").assertTextEquals("test text")
     }
 }
