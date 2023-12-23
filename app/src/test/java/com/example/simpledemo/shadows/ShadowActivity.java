@@ -29,11 +29,18 @@ public class ShadowActivity extends org.robolectric.shadows.ShadowActivity {
     public ShadowActivity() {
     }
 
+    /**
+     * Invoke startActivityForResult on the real instance. Then launch the next
+     * activity.
+     */
     @Implementation
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
         Reflector.reflector(_Activity_.class, realActivity)
                 .startActivityForResult(intent, requestCode, options);
+        // Save the scenario for the next activity, to clean up its resources later.
         nextActivityScenario = ActivityScenario.launchActivityForResult(intent);
+        // Keep track of ourselves (the calling activity) as the activity who launched
+        // this intent. When the next activity finishes, it will call us with the result.
         callingActivitiesForResult.put(intent, realActivity);
     }
 
