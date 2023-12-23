@@ -1,4 +1,4 @@
-# Demo app of unified Robolectric/Espresso tests
+# Demo app of unified Robolectric/Instrumentation test
 
 This project provides a basic example of a UI test that can be run both on
 Robolectric and on an emulator or device.
