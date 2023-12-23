@@ -8,19 +8,19 @@ The app's UI is in compose.
 The app's structure is like this:
 
 ```
-     ┌───────────────┐                       ┌───────────────┐                  ┌──────────────┐
-     │ MainActivity  │                       │ SecondActivity│                  │MainActivity  │
-     │               │                       │               │                  │              │
-     │ Label         │                       │ Text input    │                  │Label         │
-     │ ""            │                       │ "Hello"       │                  │"Hello"       │
-     │               │                       │               │                  │              │
-     │               │                       │               │                  │              │
-     │               │                       │               │                  │              │
-     │ Button        │      startActivity    │ Button        │     finish       │Button        │
-     │ "Click me"    ├──────────────────────►│ "Close"       ├─────────────────►│"Click me"    │
-     │               │       ForResult       │               │                  │              │
-     │               │                       │               │                  │              │
-     └───────────────┘                       └───────────────┘                  └──────────────┘
+┌───────────────┐                       ┌───────────────┐                  ┌──────────────┐
+│ MainActivity  │                       │ SecondActivity│                  │MainActivity  │
+│               │                       │               │                  │              │
+│ Label         │                       │ Text input    │                  │Label         │
+│ ""            │                       │ "Hello"       │                  │"Hello"       │
+│               │                       │               │                  │              │
+│               │                       │               │                  │              │
+│               │                       │               │                  │              │
+│ Button        │      startActivity    │ Button        │     finish       │Button        │
+│ "Click me"    ├──────────────────────►│ "Close"       ├─────────────────►│"Click me"    │
+│               │       ForResult       │               │                  │              │
+│               │                       │               │                  │              │
+└───────────────┘                       └───────────────┘                  └──────────────┘
 ```
 
 The `MainActivity` has a label (initially blank) and a button "Click me".
